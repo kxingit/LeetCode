@@ -1,6 +1,7 @@
 /* 
  * Given an integer array of size n, find all elements that appear more than ⌊ n/3 ⌋ times. 
  * The algorithm should run in linear time and in O(1) space.
+ * https://en.wikipedia.org/wiki/Boyer%E2%80%93Moore_majority_vote_algorithm
  */
 class Solution {
   public:
