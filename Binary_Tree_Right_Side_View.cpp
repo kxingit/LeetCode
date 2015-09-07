@@ -1,5 +1,6 @@
-/*
- * Given a binary tree, return the level order traversal of its nodes' values. (ie, from left to right, level by level).
+/* 
+ * Given a binary tree, imagine yourself standing on the right side of it, 
+ * return the values of the nodes you can see ordered from top to bottom.
  */
 class Solution {
   public:
@@ -10,31 +11,33 @@ class Solution {
       vector<TreeNode*> *next = new vector<TreeNode*>();
       curr->push_back(root);
       while(!curr->empty()){
-	vector<int> currval; // current level values
+	vector<int> currval;
 	for(int i = 0; i < curr->size(); i++){
-	  TreeNode* node = (*curr)[i];
+	  auto node = (*curr)[i];
 	  currval.push_back(node->val);
 	  if(node->left) next->push_back(node->left);
 	  if(node->right) next->push_back(node->right);
 	}
 	result.push_back(currval);
-	vector<TreeNode*> *temp = curr;
-	curr = next;
-	next = temp;
+	swap(curr, next);
 	next->clear();
       }
       return result;
     }
 };
-// v2: recursion
+// recursive
 class Solution {
   public:
-    vector<vector<int>> levelOrder(TreeNode* root) {
+    vector<int> rightSideView(TreeNode* root) {
       vector<vector<int>> result;
+      vector<int> ret;
       trans(root, 1, result);
-      return result;
+      for(int i = 0; i < result.size(); i++){
+	ret.push_back(result[i][result[i].size() - 1]);
+      }
+      return ret;
     }
-    void trans(TreeNode* root, int level, vector<vector<int>> &result) {
+    void trans(TreeNode* &root, int level, vector<vector<int>> &result) {
       if(!root) return;
       if(result.size() < level) result.push_back(vector<int>());
       result[level - 1].push_back(root->val);
