@@ -21,3 +21,19 @@ class Solution {
       }
     }
 };
+// v2
+class Solution {
+  public:
+    bool canPermutePalindrome(string s) {
+      map<char, int> dict;
+      for(auto c : s) {
+	dict[c]++;
+      }
+      int nOdd = 0; // number of odd char
+      for(auto i : dict){
+	if(i.second % 2 == 1) nOdd++;
+      }
+      if(nOdd == 0 || nOdd == 1) return true;
+      else return false;
+    }
+};

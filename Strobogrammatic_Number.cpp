@@ -60,3 +60,25 @@ class Solution {
       else return false;
     }
 };
+// v3
+class Solution {
+  public:
+    bool isStrobogrammatic(string num) {
+      int n = num.size();
+      if(!n) return true;
+      int i = 0, j = n - 1;
+      while(i <= j) {
+	if(!isStrobo(num[i], num[j])) return false;
+	i++;
+	j--;
+      }
+      return true;
+    }
+    bool isStrobo(char a, char b){
+      bool temp = (a == '0' && b == '0') || (a == '1' && b == '1')
+	|| (a == '6' && b == '9') || (a == '8' && b == '8')
+	|| (a == '9' && b == '6');
+      if(temp) return true;
+      else return false;
+    }
+};

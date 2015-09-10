@@ -19,7 +19,7 @@ class Solution {
       return result;
     }
 };
-/* a faster solution
+// v2
 class Solution {
   public:
     vector<int> plusOne(vector<int>& digits) {
@@ -29,7 +29,6 @@ class Solution {
 	result.push_back(1);
 	return result;
       }
-
       for(int i =  n - 1; i >= 0; i--){ // [0] is the highest!!!
 	if(result[i] < 9){
 	  result[i] = result[i] + 1;
@@ -44,4 +43,25 @@ class Solution {
 
     }
 };
-*/
+// v3
+class Solution {
+  public:
+    vector<int> plusOne(vector<int>& digits) {
+      int n = digits.size();
+      int curr, carry;
+      for(int i = digits.size() - 1; i >= 0; i--) {
+	if(i == digits.size() - 1) {
+	  curr = digits[i] + 1;
+	}
+	else { 
+	  curr = digits[i] + carry;
+	}
+	carry = curr / 10;
+	digits[i] = curr % 10;
+      }
+      if(carry > 0) {
+	digits.insert(digits.begin(), 1);
+      }
+      return digits;
+    }
+};

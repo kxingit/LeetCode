@@ -21,3 +21,24 @@ class Solution {
       }
     }
 };
+// v2
+class Solution {
+  public:
+    int kthSmallest(TreeNode* root, int k) {
+      stack<TreeNode*> st;
+      int count = 0;
+      while(root || !st.empty()){
+	if(root) {
+	  st.push(root);
+	  root = root->left;
+	}
+	else {
+	  root = st.top(); // all left has transversed 
+	  st.pop();
+	  count++;
+	  if(count == k) return root->val;
+	  root = root->right;
+	}
+      }
+    }
+};

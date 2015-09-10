@@ -14,3 +14,19 @@ class Solution {
       return abs(root->val - target) < abs(newsolution - target) ? root->val : newsolution;
     }
 };
+// v2
+class Solution {
+  public:
+    int closestValue(TreeNode* root, double target) {
+      int cand; // a candidate
+      if(target > root->val) {
+	if(!root->right) return root->val;
+	cand = closestValue(root->right, target);
+      }
+      else {
+	if(!root->left) return root->val;
+	cand = closestValue(root->left, target);
+      }
+      return abs(root->val - target) < abs(cand - target) ? root->val : cand;
+    }
+};
