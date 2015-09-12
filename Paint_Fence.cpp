@@ -52,3 +52,19 @@ class Solution {
       return s + d2;
     }
 };
+// v3: better variable names
+class Solution {
+  public:
+    int numWays(int n, int k) {
+      if(n == 0) return 0;
+      if(n <= 2) return pow(k, n);
+      int same = k;
+      int notSame = k * (k - 1);
+      for(int i = 3; i <= n; i++) {
+	int temp = same;
+	same = notSame;
+	notSame = (k - 1) * temp + (k - 1) * notSame;
+      }
+      return same + notSame;
+    }
+};
