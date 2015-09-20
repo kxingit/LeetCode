@@ -65,3 +65,23 @@ class Solution {
       return digits;
     }
 };
+// v4
+class Solution {
+  public:
+    vector<int> plusOne(vector<int>& digits) {
+      int i = digits.size() - 1;
+      int carry = 0;
+      while(i >= 0) {
+	int curr;
+	if(i == digits.size() - 1) curr = digits[i] + 1;
+	else curr = digits[i] + carry;
+	digits[i] = curr % 10;
+	carry = curr / 10;
+	i--;
+      }
+      if(carry) {
+	digits.insert(digits.begin(), carry);
+      }
+      return digits;
+    }
+};

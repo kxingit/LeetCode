@@ -34,3 +34,22 @@ class Solution {
       return candidate;
     }
 };
+// v3
+class Solution {
+  public:
+    int majorityElement(vector<int>& nums) {
+      int cand = nums[0];
+      int count = 0;
+      for(int i = 0; i < nums.size(); i++) {
+	if(nums[i] == cand) count++;
+	else {
+	  count--;
+	  if(count < 0) {
+	    cand = nums[i];
+	    count = 1;
+	  }
+	}
+      }
+      return cand;
+    }
+};

@@ -26,3 +26,30 @@ class Solution {
       solution.pop_back();
     }
 };
+// v2
+class Solution {
+  public:
+    vector<vector<int>> pathSum(TreeNode* root, int sum) {
+      vector<vector<int>> res;
+      vector<int> solution;
+      int currSum = 0;
+      path(root, currSum, sum, solution, res);
+      return res;
+    }
+    void path(TreeNode* &root, int currSum, int sum, vector<int> &solution, vector<vector<int>> &res) {
+      if(!root) return;
+      currSum += root->val;
+      solution.push_back(root->val);
+      if(!root->left && !root->right) {
+	if(currSum == sum) res.push_back(solution);
+	// return;
+      }
+      if(root->left) {
+	path(root->left, currSum, sum, solution, res);
+      }
+      if(root->right) {
+	path(root->right, currSum, sum, solution, res);
+      }
+      solution.pop_back();
+    }
+};
