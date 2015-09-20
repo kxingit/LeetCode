@@ -60,3 +60,33 @@ class Solution {
       return result;
     }
 };
+// v3
+class Solution {
+  public:
+    int longestConsecutive(vector<int>& nums) {
+      unordered_set<int> dict;
+      for(int i = 0; i < nums.size(); i++) {
+	dict.insert(nums[i]);
+      }
+      int result = 1;
+      for(int i = 0; i < nums.size(); i++) {
+	int num = nums[i];
+	int curlong = 1;
+	int temp = num;
+	dict.erase(temp);
+	while(dict.find(temp + 1) != dict.end()) {
+	  curlong++;
+	  dict.erase(temp + 1);
+	  temp = temp + 1;
+	}
+	temp = num;
+	while(dict.find(temp - 1) != dict.end()) {
+	  curlong++;
+	  dict.erase(temp - 1);
+	  temp = temp - 1;
+	}
+	result = max(result, curlong);
+      }
+      return result;
+    }
+};

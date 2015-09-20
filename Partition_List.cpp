@@ -29,3 +29,82 @@ class Solution {
       return head;
     }
 };
+// v2
+class Solution {
+  public:
+    ListNode* partition(ListNode* head, int x) {
+      if(!head) return head;
+      ListNode* h1 = new ListNode(0);
+      ListNode* h2 = new ListNode(0);
+      ListNode* p2 = h2;
+      h1->next = head;
+      head = h1;
+      while(head->next) {
+	if(head->next->val < x) {
+	  head = head->next;
+	}
+	else {
+	  p2->next = head->next;
+	  head->next = head->next->next;
+	  p2 = p2->next;
+	  p2->next = NULL;
+	}
+      }
+      head->next = h2->next;
+      delete h1;
+      delete h2;
+      return h1->next;
+    }
+};
+// v3
+class Solution {
+  public:
+    ListNode* partition(ListNode* head, int x) {
+      ListNode* h1 = new ListNode(0);
+      ListNode* h2 = new ListNode(0);
+      ListNode* p2 = h2;
+      h1->next = head;
+      head = h1;
+      while(head->next) {
+	if(head->next->val < x) {
+	  head = head->next;
+	}
+	else {
+	  p2->next = head->next;
+	  head->next = head->next->next;
+	  p2 = p2->next;
+	  p2->next = NULL;
+	}
+      }
+      head->next = h2->next;
+      delete h1;
+      delete h2;
+      return h1->next;
+    }
+};
+// v4
+class Solution {
+  public:
+    ListNode* partition(ListNode* head, int x) {
+      ListNode* h1 = new ListNode(0);
+      ListNode* h2 = new ListNode(0);
+      ListNode* p = h2;
+      h1->next = head;
+      head = h1;
+      while(head->next) {
+	if(head->next->val < x) {
+	  head = head->next; // skip 
+	}
+	else {
+	  p->next = head->next;
+	  head->next = head->next->next;
+	  p = p->next;
+	  p->next = NULL;
+	}
+      }
+      head->next = h2->next;
+      delete h1;
+      delete h2;
+      return h1->next;
+    }
+};

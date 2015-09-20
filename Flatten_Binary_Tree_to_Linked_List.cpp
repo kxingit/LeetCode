@@ -15,3 +15,51 @@ class Solution {
       root->left = NULL;
     }
 };
+// v2
+class Solution {
+  public:
+    void flatten(TreeNode* root) {
+      if(!root) return;
+      TreeNode* left = root->left;
+      TreeNode* right = root->right;
+      flatten(left);
+      flatten(right);
+      if(!left) return;
+      while(left->right) left = left->right;
+      left->right = root->right;
+      root->right = root->left;
+      root->left = NULL;
+    }
+};
+// v3
+class Solution {
+  public:
+    void flatten(TreeNode* root) {
+      if(!root) return;
+      auto left = root->left;
+      auto right = root->right;
+      flatten(left);
+      flatten(right);
+      auto p = left;
+      if(!p) return; // important
+      while(p->right) p = p->right;
+      p->right = root->right;
+      root->right = left;
+      root->left = NULL;
+    }
+};
+// v4
+class Solution {
+  public:
+    void flatten(TreeNode* root) {
+      if(!root) return;
+      flatten(root->left);
+      flatten(root->right);
+      auto p = root->left;
+      if(!p) return;
+      while(p->right) p = p->right;
+      p->right = root->right;
+      root->right = root->left;
+      root->left = NULL;
+    }
+};
