@@ -24,3 +24,45 @@ class Solution {
       return;
     }
 };
+// v2
+class Solution {
+  public:
+    void connect(TreeLinkNode *root) {
+      if(!root) return;
+      vector<TreeLinkNode*> currLevel;
+      vector<TreeLinkNode*> nextLevel;
+      currLevel.push_back(root);
+      while(!currLevel.empty()) {
+	for(int i = 0; i < currLevel.size(); i++) {
+	  auto p = currLevel[i];
+	  if(i == currLevel.size() - 1) p->next = NULL;
+	  else p->next = currLevel[i + 1];
+	  if(p->left) nextLevel.push_back(p->left);
+	  if(p->right) nextLevel.push_back(p->right);
+	}
+	currLevel = nextLevel;
+	nextLevel.clear();
+      }
+    }
+};
+// v3
+class Solution {
+  public:
+    void connect(TreeLinkNode *root) {
+      if(!root) return;
+      vector<TreeLinkNode*> currLevel;
+      vector<TreeLinkNode*> nextLevel;
+      currLevel.push_back(root);
+      while(!currLevel.empty()) {
+	for(int i = 0; i < currLevel.size(); i++) {
+	  if(i == currLevel.size() - 1) currLevel[i]->next = NULL;
+	  else currLevel[i]->next = currLevel[i + 1];
+	  auto p = currLevel[i];
+	  if(p->left) nextLevel.push_back(p->left);
+	  if(p->right) nextLevel.push_back(p->right);
+	}
+	currLevel = nextLevel;
+	nextLevel.clear();
+      }
+    }
+};
