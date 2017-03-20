@@ -36,3 +36,24 @@ class Solution {
       return true;
     }
 };
+
+// v3
+class Solution {
+public:
+    bool isAnagram(string s, string t) {
+        // 11:32 - 11:35
+        if(s.size() != t.size()) return false;
+        int n = s.size();
+        unordered_map<char, int> counts;
+        for(int i = 0; i < n; i++) {
+            counts[s[i]]++;
+        }
+        for(int i = 0; i < n; i++) {
+            counts[t[i]]--;
+            if(counts[t[i]] < 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+};

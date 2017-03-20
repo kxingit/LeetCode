@@ -37,3 +37,40 @@ class Solution {
       }
     }
 };
+
+// v2
+class Solution {
+public:
+    vector<vector<int>> threeSum(vector<int>& nums) {
+        // 10:30 - 10:42
+        int n = nums.size();
+        sort(nums.begin(), nums.end());
+        vector<vector<int>> res;
+        
+        for(int i = 0; i < n; i++) {
+            if(i > 0 && nums[i] == nums[i - 1]) continue;
+            int gap = -nums[i];
+            int l = i + 1, r = n - 1;
+            while(l < r) {
+                if(l > i + 1 && nums[l] == nums[l - 1]) {
+                    l++;
+                    continue;
+                }
+                if(nums[l] + nums[r] == gap) {
+                    vector<int> solution;
+                    solution.push_back(nums[i]);
+                    solution.push_back(nums[l]);
+                    solution.push_back(nums[r]);
+                    res.push_back(solution);
+                    l++;
+                } else if(nums[l] + nums[r] > gap) {
+                    r--;
+                } else {
+                    l++;
+                }
+            }
+        }
+        
+        return res;
+    }
+};

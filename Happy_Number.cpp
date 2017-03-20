@@ -30,3 +30,28 @@ class Solution {
       return n == 1;
     }
 };
+
+// v2
+class Solution {
+public:
+    bool isHappy(int n) {
+        // 11:10 - 11:13
+        unordered_set<int> set;
+        
+        while(n != 1) {
+            set.insert(n);
+            int next = 0;
+            while(n) {
+                int last = n % 10;
+                n = n / 10;
+                next += last * last;
+            }
+            if(set.find(next) != set.end()) {
+                return false;
+            }
+            n = next;
+        }
+        
+        return true;
+    }
+};

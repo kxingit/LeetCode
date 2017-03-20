@@ -14,3 +14,20 @@ class Solution {
       return false;
     }
 };
+
+// v2
+class Solution {
+public:
+    bool containsDuplicate(vector<int>& nums) {
+        // 11:15 - 11:16
+        unordered_set<int> set;
+        for(int i = 0; i < nums.size(); i++) {
+            if(set.find(nums[i]) != set.end()) {
+                return true;
+            }
+            set.insert(nums[i]);
+        }
+        
+        return false;
+    }
+};

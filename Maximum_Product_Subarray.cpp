@@ -38,3 +38,25 @@ class Solution {
       return result;
     }
 };
+
+// v3
+class Solution {
+public:
+    int maxProduct(vector<int>& nums) {
+        // 11:21 - 11:26
+        int n = nums.size();
+        int mindp[n + 1];
+        int maxdp[n + 1];
+        mindp[0] = 1;
+        maxdp[0] = 1;
+        int res = INT_MIN;
+        
+        for(int i = 1; i <= n; i++) {
+            mindp[i] = min(nums[i - 1], min(mindp[i - 1] * nums[i - 1], maxdp[i - 1] * nums[i - 1]));
+            maxdp[i] = max(nums[i - 1], max(mindp[i - 1] * nums[i - 1], maxdp[i - 1] * nums[i - 1]));
+            res = max(res, maxdp[i]);
+        }
+        
+        return res;
+    }
+};

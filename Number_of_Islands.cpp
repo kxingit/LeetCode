@@ -60,3 +60,36 @@ class Solution {
       expend(grid, i, j + 1);
     }
 };
+
+// v3
+class Solution {
+public:
+    int m, n;
+    int numIslands(vector<vector<char>>& grid) {
+        // 10:56 - 11:00
+        m = grid.size();
+        if(m == 0) return 0;
+        n = grid[0].size();
+        int res = 0;
+        
+        for(int i = 0; i < m; i++) {
+            for(int j = 0; j < n; j++) {
+                if(grid[i][j] == '1') {
+                    res++;
+                    dfs(grid, i, j);
+                }
+            }
+        }
+        return res;
+    }
+    
+    void dfs(vector<vector<char>>& grid, int i, int j) {
+        if(i < 0 || j < 0 || i >= m || j >= n) return;
+        if(grid[i][j] != '1') return;
+        grid[i][j] = '2';
+        dfs(grid, i + 1, j);
+        dfs(grid, i - 1, j);
+        dfs(grid, i, j - 1);
+        dfs(grid, i, j + 1);
+    }
+};
