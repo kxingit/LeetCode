@@ -45,3 +45,26 @@ class Solution {
 	  }
 	}
 };
+
+
+// v3
+class Solution {
+public:
+    vector<vector<int>> subsets(vector<int>& nums) {
+        // 8:55 - 8:58
+        vector<vector<int>> res;
+        vector<int> solution;
+        getsub(nums, 0, solution, res);
+        return res;
+    }
+    
+    void getsub(vector<int> &nums, int start, vector<int> &solution, vector<vector<int>> &res) {
+        res.push_back(solution);
+        
+        for(int i = start; i < nums.size(); i++) {
+            solution.push_back(nums[i]);
+            getsub(nums, i + 1, solution, res);
+            solution.pop_back();
+        }
+    }
+};

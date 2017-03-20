@@ -55,3 +55,22 @@ class Solution {
 	  return result;
 	}
 };
+
+// v4
+class Solution {
+public:
+    vector<int> twoSum(vector<int>& nums, int target) {
+        // 7:15 - 7:19
+        unordered_map<int, int> map;
+        vector<int> res;
+        for(int i = 0; i < nums.size(); i++) {
+            int gap = target - nums[i];
+            if(map.find(gap) != map.end()) {
+                res.push_back(i);
+                res.push_back(map[gap]);
+            }
+            map[nums[i]] = i;
+        }
+        return res;
+    }
+};

@@ -56,3 +56,76 @@ class MinStack {
       return stmin.top();
     }
 };
+
+// v3
+class MinStack {
+public:
+    /** initialize your data structure here. */
+    // 7:59 - 8:09
+    stack<int> st;
+    stack<int> minst;
+    MinStack() {
+        
+    }
+    
+    void push(int x) {
+        st.push(x);
+        if(minst.empty()) {
+            minst.push(x);
+        } else {
+            minst.push(min(x, minst.top()));
+        }
+    }
+    
+    void pop() {
+        st.pop();
+        minst.pop();
+    }
+    
+    int top() {
+        return st.top();
+    }
+    
+    int getMin() {
+        return minst.top();
+    }
+};
+
+
+// v4
+class MinStack {
+public:
+    /** initialize your data structure here. */
+    // 7:59 - 8:09 - 8:12
+    stack<int> st;
+    stack<int> minst;
+    MinStack() {
+        
+    }
+    
+    void push(int x) {
+        st.push(x);
+        if(minst.empty()) {
+            minst.push(x);
+        } else {
+            if(x <= minst.top()) {
+                minst.push(min(x, minst.top()));
+            }
+        }
+    }
+    
+    void pop() {
+        if(st.top() == minst.top()) {
+            minst.pop();
+        }
+        st.pop();
+    }
+    
+    int top() {
+        return st.top();
+    }
+    
+    int getMin() {
+        return minst.top();
+    }
+};

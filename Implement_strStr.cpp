@@ -14,7 +14,6 @@ class Solution {
       }
       return -1;
     }
-=======
 /*
  *  Implement strStr().
  *
@@ -34,5 +33,22 @@ class Solution {
 	  }
 	  return -1;
 	}
->>>>>>> 02f885fa68d0c2068268dd99680d613b20f243ac
+};
+
+// v3
+class Solution {
+public:
+    int strStr(string s, string t) {
+        // 7:24 - 7:33
+        if(t.size() == 0) return 0;
+        if(s.size() == 0) return -1;
+        for(int i = 0; i < s.size(); i++) {
+            if(i + t.size() - 1 > s.size()) continue;
+            for(int j = 0; j < t.size(); j++) {
+                if(s[i + j] != t[j]) break;
+                if(j == t.size() - 1) return i;
+            }
+        }
+        return -1;
+    }
 };

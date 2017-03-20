@@ -15,3 +15,13 @@ class Solution {
       return depth;
     }
 };
+
+// v2
+class Solution {
+public:
+    int maxDepth(TreeNode* root) {
+        // 7:57 - 7:57
+        if(!root) return 0;
+        return 1 + max(maxDepth(root->left), maxDepth(root->right));
+    }
+};

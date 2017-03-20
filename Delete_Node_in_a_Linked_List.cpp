@@ -15,3 +15,12 @@ class Solution {
       node->next = node->next->next;
     }
 };
+
+// v2
+public:
+    void deleteNode(ListNode* node) {
+        // 7:55 - 7:56
+        node->val = node->next->val;
+        node->next = node->next->next;
+    }
+};
